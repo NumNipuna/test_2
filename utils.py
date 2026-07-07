@@ -1,9 +1,17 @@
 import streamlit as st
 import gspread
+import json  # ---> NEW IMPORT
 
 @st.cache_resource
 def connect_to_sheets():
-    gc = gspread.service_account(filename="service_account.json")
+    # If running on Streamlit Cloud, use the secure secrets dashboard
+    if "gcp_json" in st.secrets:
+        credentials = json.loads(st.secrets["gcp_json"])
+        gc = gspread.service_account_from_dict(credentials)
+    # If running locally on your computer, use your local file
+    else:
+        gc = gspread.service_account(filename="service_account.json")
+        
     sh = gc.open_by_url("https://docs.google.com/spreadsheets/d/1TWSwwcEElojBnoqY_hPllfb3l9xn1_9ed4Xy4FQdq98/edit")
     return sh
 
