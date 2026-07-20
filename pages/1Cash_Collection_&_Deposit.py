@@ -519,8 +519,8 @@ with tab2:
         @st.cache_data(ttl=660)
         def load_google_sheet_data():
             scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
-            file_path = 'C:/Users/Asus/Desktop/Python/Sales departmet reports/Sales_App/service_account.json'
-            creds = ServiceAccountCredentials.from_json_keyfile_name(file_path, scope)
+            creds_dict = dict(st.secrets["google_sheets_creds"])
+            creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_dict, scope)
             client = gspread.authorize(creds) 
             
             sheet_daily = client.open("Sales data").worksheet("Data_Entry")
