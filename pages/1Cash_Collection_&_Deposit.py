@@ -519,7 +519,7 @@ with tab2:
         @st.cache_data(ttl=660)
         def load_google_sheet_data():
             scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
-            creds_dict = dict(st.secrets["google_sheets_creds"])
+            creds_dict = json.loads(st.secrets["google_sheets_creds"])
             creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_dict, scope)
             client = gspread.authorize(creds) 
             
