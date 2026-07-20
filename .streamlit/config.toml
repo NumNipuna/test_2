@@ -1,0 +1,17 @@
+[theme]
+# Force the base theme to be dark so tables and text automatically format for dark mode
+base="dark"
+
+# The main background color (for your main dashboard area)
+# #0e1117 is the default Streamlit dark background
+backgroundColor="#0e1117"
+
+# The secondary background color (This controls the SIDEBAR and the background of input fields)
+# #262730 is a slightly lighter dark grey for contrast
+secondaryBackgroundColor="#262730"
+
+# The color of your text
+textColor="#fafafa"
+
+# The accent color (Controls the color of buttons, sliders, and active tabs)
+# primaryColor="#55a630"
