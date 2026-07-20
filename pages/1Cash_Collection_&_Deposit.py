@@ -1,5 +1,4 @@
 import gspread
-from gspread.auth import ServiceAccountCredentials
 import streamlit as st
 import pandas as pd
 import streamlit.components.v1 as components  
@@ -35,16 +34,9 @@ st.markdown("""
 
 /* Animated gradient app background */
 .stApp {
-    background: linear-gradient(
-        135deg,
-        #4f372d 0%,
-        #cc2a36 25%,
-        #eb6841 50%,
-        #edc951 75%,
-        #00a0b0 100%
-    );
+    background: linear-gradient(135deg, #4f372d 0%, #cc2a36 25%, #eb6841 50%, #edc951 75%, #00a0b0 100%);
     background-size: 400% 400%;
-    animation: gradientShift 24s ease infinite;
+    animation: gradientShift 22s ease infinite;
 }
 
 @keyframes gradientShift {
