@@ -3,7 +3,6 @@ import pandas as pd
 import numpy as np
 from gspread_dataframe import set_with_dataframe
 import gspread
-from oauth2client.service_account import ServiceAccountCredentials
 from utils import connect_to_sheets, fetch_database_records, add_logo, check_password, check_access
 import datetime
 import time
