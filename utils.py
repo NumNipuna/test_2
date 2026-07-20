@@ -11,7 +11,6 @@ def connect_to_sheets():
     scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
     creds_dict = json.loads(st.secrets["google_sheets_creds"])
     creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_dict, scope)
-    # ... ithuru code eka
 def add_logo():
     logo_path = "logo.png"
     if os.path.exists(logo_path):
@@ -76,8 +75,21 @@ def hide_chrome_before_login():
 
 @st.cache_resource
 def connect_to_sheets():
-    gc = gspread.service_account(filename="service_account.json")
+    # 1. Scope define karanna
+    scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
+    
+    # 2. Secrets walin JSON eka ganna
+    creds_dict = json.loads(st.secrets["google_sheets_creds"])
+    
+    # 3. Credentials object eka hadanna
+    creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_dict, scope)
+    
+    # 4. Gspread authorize karanna (Me step eka parana code eke adu wela thibbe)
+    gc = gspread.authorize(creds)
+    
+    # 5. Sheet eka open karanna
     sh = gc.open_by_url("https://docs.google.com/spreadsheets/d/1TWSwwcEElojBnoqY_hPllfb3l9xn1_9ed4Xy4FQdq98/edit")
+    
     return sh
 
 @st.cache_data
