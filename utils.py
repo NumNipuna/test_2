@@ -3,11 +3,15 @@ import gspread
 import json
 import os
 import base64
+from oauth2client.service_account import ServiceAccountCredentials
 
 # --- ADD THIS NEW FUNCTION ---
 
-creds_dict = json.loads(st.secrets["google_sheets_creds"])
-creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_dict, scope)
+def connect_to_sheets():
+    scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
+    creds_dict = json.loads(st.secrets["google_sheets_creds"])
+    creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_dict, scope)
+    # ... ithuru code eka
 def add_logo():
     logo_path = "logo.png"
     if os.path.exists(logo_path):
