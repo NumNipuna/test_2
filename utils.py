@@ -5,6 +5,9 @@ import os
 import base64
 
 # --- ADD THIS NEW FUNCTION ---
+
+creds_dict = json.loads(st.secrets["google_sheets_creds"])
+creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_dict, scope)
 def add_logo():
     logo_path = "logo.png"
     if os.path.exists(logo_path):
