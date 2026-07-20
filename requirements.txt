@@ -6,3 +6,4 @@ gspread-dataframe
 oauth2client
 plotly
 xhtml2pdf
+matplotlib
