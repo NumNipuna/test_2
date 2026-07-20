@@ -513,7 +513,7 @@ with tab2:
             with open(path, "rb") as img_file:
                 return base64.b64encode(img_file.read()).decode()
 
-        logo_base64 = get_base64_logo("C:/Users/Asus/Desktop/Python/Sales departmet reports/Sales_App/logo.png")
+        logo_base64 = get_base64_logo("logo.png")
         
         # 1. Authenticate and Connect to the Separate Google Sheet
         @st.cache_data(ttl=660)
