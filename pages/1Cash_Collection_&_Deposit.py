@@ -1,4 +1,5 @@
 import gspread
+from gspread.auth import ServiceAccountCredentials
 import streamlit as st
 import pandas as pd
 import streamlit.components.v1 as components  
@@ -513,14 +514,14 @@ with tab2:
             with open(path, "rb") as img_file:
                 return base64.b64encode(img_file.read()).decode()
 
-        logo_base64 = get_base64_logo("logo.png")
+        logo_base64 = get_base64_logo("C:/Users/Asus/Desktop/Python/Sales departmet reports/Sales_App/logo.png")
         
         # 1. Authenticate and Connect to the Separate Google Sheet
         @st.cache_data(ttl=660)
         def load_google_sheet_data():
             scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
-            creds_dict = json.loads(st.secrets["google_sheets_creds"])
-            creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_dict, scope)
+            file_path = 'C:/Users/Asus/Desktop/Python/Sales departmet reports/Sales_App/service_account.json'
+            creds = ServiceAccountCredentials.from_json_keyfile_name(file_path, scope)
             client = gspread.authorize(creds) 
             
             sheet_daily = client.open("Sales data").worksheet("Data_Entry")

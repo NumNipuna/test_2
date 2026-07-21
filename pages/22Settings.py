@@ -123,10 +123,9 @@ def get_banks_data():
 
 
 # Create tabs
-tab1, tab2, tab3 = st.tabs(["Cash Collection & Deposit", "tab 2","tab 3"])
+tab1, tab2, tab3 = st.tabs(["Cash Collection & Deposit", "Rep Target","tab 3"])
 
 with tab1:
-
 
     df_reps = get_reps_data()
     df_banks = get_banks_data()
@@ -224,3 +223,38 @@ with tab1:
                         st.rerun() 
         else:
             st.info("No banks found in the sheet.")
+
+
+###############################################################################################################
+import streamlit as st
+import pandas as pd
+from utils import update_master_data
+
+@st.cache_data
+def get_master():
+    data = load_master_data()
+    return pd.DataFrame(data)
+
+
+with tab2:
+    st.warning("⚠️ The changes made here will be permanently applied to the Master List. (They will not affect the targets of months that have already been saved.)")
+    
+    # Settings වලදී මුලු Dataframe එකම Edit කරන්න දෙමු (Rows එකතු කිරීමට/මැකීමටත් ඉඩ දෙන්න)
+    df_settings = get_master().copy()  # Cache එකෙන් ගමු
+    
+    edited_settings = st.data_editor(
+        df_settings,
+        use_container_width=True,
+        height=400,
+        num_rows="dynamic"  # මෙය rows එකතු කිරීමට/මැකීමට ඉඩ දෙයි
+    )
+    
+    if st.button("💾 Master Data Update කරන්න", type="primary"):
+        try:
+            update_master_data(edited_settings)
+            # Cache එක Clear කරන්න (ඊළඟ වතාවේ අලුත් Data එනවා)
+            st.cache_data.clear()
+            st.success("✅ Master Data සාර්ථකව යාවත්කාලීන කරන ලදී!")
+            st.rerun()  # පිටුව Refresh කරන්න
+        except Exception as e:
+            st.error(f"❌ දෝෂයක්: {e}")

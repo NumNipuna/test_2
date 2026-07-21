@@ -1,6 +1,7 @@
 import streamlit as st
 from utils import fetch_database_records, check_password, add_logo, check_access # Import the functions
-
+import os
+import base64
 
 st.set_page_config(page_title="Sales Portal", layout="wide")
 
