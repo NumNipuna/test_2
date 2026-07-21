@@ -3,7 +3,7 @@ import gspread
 import json
 import os
 import base64
-from google.oauth2 import service_account
+from google.oauth2.service_account import Credentials
 
 credentials = service_account.Credentials.from_service_account_info(
     dict(st.secrets["gcp_service_account"])
@@ -255,10 +255,15 @@ import pandas as pd
 
 # ----- Google Sheets Connection -----
 def get_client():
-    scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
-    # ඔබගේ JSON file එකේ නම (උදා: "credentials.json")
-    creds = ServiceAccountCredentials.from_json_keyfile_name("C:/Users/Asus/Desktop/Python/Sales departmet reports/Sales_App/service_account.json", scope)
-    return gspread.authorize(creds)
+    scope = [
+        "https://www.googleapis.com/auth/spreadsheets",
+        "https://www.googleapis.com/auth/drive"
+    ]
+    credentials = Credentials.from_service_account_info(
+        dict(st.secrets["gcp_service_account"]),
+        scopes=scope
+    )
+    return gspread.authorize(credentials)
 
 # ----- Master Data Load කරන්න -----
 def load_master_data():

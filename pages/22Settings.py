@@ -3,6 +3,8 @@ import pandas as pd
 from utils import connect_to_sheets, fetch_database_records, add_logo,check_password, check_access # Import the functions
 from oauth2client.service_account import ServiceAccountCredentials
 import gspread
+from utils import get_client
+client = get_client()
 
 st.set_page_config(page_title="Settings", layout="wide")
 st.title("⚙️ Settings")

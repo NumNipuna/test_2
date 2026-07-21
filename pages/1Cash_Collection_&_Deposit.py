@@ -13,6 +13,8 @@ import plotly.graph_objects as go
 from oauth2client.service_account import ServiceAccountCredentials
 import io
 from xhtml2pdf import pisa
+from utils import get_client
+client = get_client()
 
 st.set_page_config(page_title=" Cash Collection & Cash Deposit", layout="wide")
 

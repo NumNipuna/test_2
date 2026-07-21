@@ -12,6 +12,8 @@ import io
 import base64
 from xhtml2pdf import pisa
 import streamlit.components.v1 as components
+from utils import get_client
+client = get_client()
 
 st.set_page_config(page_title="Report 2", layout="wide")
 

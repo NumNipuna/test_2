@@ -7,8 +7,12 @@ from utils import (
     save_monthly_data, load_targets_for_month,
     get_sales_daybook_ws, get_rows_for_date, delete_rows_for_date
 )
+from utils import get_client
+client = get_client()
 st.set_page_config(page_title="Target Entry System", layout="wide")
 
+
+add_logo()
 # --- CSS STYLING ---
 st.markdown("""
 <style>
