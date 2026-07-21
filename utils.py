@@ -248,19 +248,21 @@ def check_access(page_name):
 
 ##############################################
 
-import gspread
-from oauth2client.service_account import ServiceAccountCredentials
+import json
+from google.oauth2.service_account import Credentials
 import streamlit as st
-import pandas as pd
 
-# ----- Google Sheets Connection -----
 def get_client():
     scope = [
         "https://www.googleapis.com/auth/spreadsheets",
         "https://www.googleapis.com/auth/drive"
     ]
+    
+    # JSON string එක parse කරගන්නවා
+    service_account_info = json.loads(st.secrets["gcp_service_account"])
+    
     credentials = Credentials.from_service_account_info(
-        dict(st.secrets["gcp_service_account"]),
+        service_account_info,
         scopes=scope
     )
     return gspread.authorize(credentials)
