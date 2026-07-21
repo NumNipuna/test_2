@@ -3,11 +3,22 @@ import gspread
 import json
 import os
 import base64
+import pandas as pd
 from google.oauth2.service_account import Credentials
 
-credentials = service_account.Credentials.from_service_account_info(
-    dict(st.secrets["gcp_service_account"])
-)
+
+def get_credentials():
+    """Centralized function to build credentials from Streamlit secrets."""
+    scope = [
+        "https://www.googleapis.com/auth/spreadsheets",
+        "https://www.googleapis.com/auth/drive"
+    ]
+    service_account_info = dict(st.secrets["gcp_service_account"])
+    return Credentials.from_service_account_info(service_account_info, scopes=scope)
+
+
+def get_client():
+    return gspread.authorize(get_credentials())
 
 # --- ADD THIS NEW FUNCTION ---
 def add_logo():
@@ -74,7 +85,7 @@ def hide_chrome_before_login():
 
 @st.cache_resource
 def connect_to_sheets():
-    gc = gspread.service_account(filename="service_account.json")
+    gc = get_client()
     sh = gc.open_by_url("https://docs.google.com/spreadsheets/d/1TWSwwcEElojBnoqY_hPllfb3l9xn1_9ed4Xy4FQdq98/edit")
     return sh
 
@@ -355,7 +366,7 @@ def save_monthly_data(month, data_list):
 
 @st.cache_resource
 def connect_to_sheets2():
-    gc = gspread.service_account(filename="service_account.json")
+    gc = get_client()
     sh = gc.open_by_url("https://docs.google.com/spreadsheets/d/1xO3xNDYkC-97BHksfiq9BRpJ9rDP9_snTzTLP-sJbMg/edit?usp=sharing")
     return sh
 
