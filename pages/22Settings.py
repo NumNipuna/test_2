@@ -102,10 +102,8 @@ st.markdown("""
 # @st.cache_resource ensures we only authenticate once per session, speeding up load times significantly.
 @st.cache_resource
 def get_google_client():
-    scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
-    file_path = 'C:/Users/Asus/Desktop/Python/Sales departmet reports/Sales_App/service_account.json'
-    creds = ServiceAccountCredentials.from_json_keyfile_name(file_path, scope)
-    return gspread.authorize(creds)
+    from utils import get_client
+    return get_client()
 
 client = get_google_client()
 

@@ -1,5 +1,4 @@
 import gspread
-from gspread.auth import ServiceAccountCredentials
 import streamlit as st
 import pandas as pd
 import streamlit.components.v1 as components  
@@ -15,6 +14,7 @@ import io
 from xhtml2pdf import pisa
 from utils import get_client
 client = get_client()
+
 
 st.set_page_config(page_title=" Cash Collection & Cash Deposit", layout="wide")
 
