@@ -3,16 +3,6 @@ import gspread
 import json
 import os
 import base64
-from google.oauth2 import service_account
-
-# 1. Read the raw JSON string from Streamlit secrets
-raw_json_string = st.secrets["gcp_json"]
-
-# 2. Parse the string back into a Python dictionary
-credentials_dict = json.loads(raw_json_string)
-
-# 3. Authenticate using the dictionary
-credentials = service_account.Credentials.from_service_account_info(credentials_dict)
 
 # --- ADD THIS NEW FUNCTION ---
 def add_logo():
