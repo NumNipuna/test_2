@@ -3,6 +3,11 @@ import gspread
 import json
 import os
 import base64
+from google.oauth2 import service_account
+
+credentials = service_account.Credentials.from_service_account_info(
+    dict(st.secrets["gcp_service_account"])
+)
 
 # --- ADD THIS NEW FUNCTION ---
 def add_logo():
