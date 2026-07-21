@@ -521,10 +521,8 @@ with tab2:
         # 1. Authenticate and Connect to the Separate Google Sheet
         @st.cache_data(ttl=660)
         def load_google_sheet_data():
-            scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
-            file_path = 'C:/Users/Asus/Desktop/Python/Sales departmet reports/Sales_App/service_account.json'
-            creds = ServiceAccountCredentials.from_json_keyfile_name(file_path, scope)
-            client = gspread.authorize(creds) 
+            from utils import get_client
+            client = get_client()
             
             sheet_daily = client.open("Sales data").worksheet("Data_Entry")
             data_daily = sheet_daily.get_all_records()
